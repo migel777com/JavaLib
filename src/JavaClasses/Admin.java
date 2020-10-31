@@ -36,7 +36,7 @@ public class Admin extends User implements adminInterface{
 
     public Student getStudent(String name) {
         for(int i=0; i<this.studentList.getList().size(); i++){
-            if(this.studentList.getList().get(i).getName() == name){
+            if(this.studentList.getList().get(i).getName().equals(name)){
                 return this.studentList.getList().get(i);
             }
         }
@@ -45,7 +45,7 @@ public class Admin extends User implements adminInterface{
 
     public Books getBook(String name) {
         for(int i=0; i<this.library.getLibrary().size(); i++){
-            if(this.library.getLibrary().get(i).getName() == name){
+            if(this.library.getLibrary().get(i).getName().equals(name)){
                 return this.library.getLibrary().get(i);
             }
         }
@@ -54,7 +54,7 @@ public class Admin extends User implements adminInterface{
 
     public void removeBook(String bookname, int quantity) {
         for(int i=0; i<this.library.getLibrary().size(); i++){
-            if(this.library.getLibrary().get(i).getName() == bookname){
+            if(this.library.getLibrary().get(i).getName().equals(bookname)){
                 this.library.getLibrary().remove(i);
                 break;
             }
@@ -63,7 +63,7 @@ public class Admin extends User implements adminInterface{
 
     public void removeStudent(String name) {
         for(int i=0; i<this.studentList.getList().size(); i++){
-            if(this.studentList.getList().get(i).getName() == name){
+            if(this.studentList.getList().get(i).getName().equals(name)){
                 this.studentList.getList().remove(i);
                 break;
             }

@@ -1,6 +1,6 @@
 package Servlets;
 
-import JavaClasses.Book;
+import JavaClasses.Books;
 import JavaClasses.DB;
 
 import javax.servlet.ServletException;
@@ -24,7 +24,7 @@ public class DBServlet extends HttpServlet
         {
             Connection connection = db.getConnection();
             //if(connection != null) {
-                ArrayList<Book> bookList = db.read(connection);
+                ArrayList<Books> bookList = db.readBooks(connection);
                 connection.close();
                 request.setAttribute("bookList", bookList);
             //}

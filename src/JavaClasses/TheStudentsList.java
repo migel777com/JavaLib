@@ -23,7 +23,7 @@ public class TheStudentsList {
     }
 
     public Student newStudent(String name, String password, TheGreatLib library){
-        Student newStudent = new Student(library, name, password);
+        Student newStudent = new Student(name, password);
         list.add(newStudent);
         newStudent.library = library;
         db.addStudent(name, password);

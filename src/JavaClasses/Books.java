@@ -11,6 +11,17 @@ public class Books {
         this.quantity = quantity;
     }
 
+    public Books(String[] bookFields)
+    {
+        if(bookFields.length == 4)
+        {
+            //this.id = Integer.parseInt(bookFields[0]);
+            this.name = bookFields[1];
+            this.author = bookFields[2];
+            this.quantity = Integer.parseInt(bookFields[3]);
+        }
+    }
+
     public String getName() {
         return name;
     }

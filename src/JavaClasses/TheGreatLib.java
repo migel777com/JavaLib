@@ -38,8 +38,8 @@ public class TheGreatLib{
     }
 
     public void printLib(){
-        for(int i=0; i<this.library.size(); i++){
-            System.out.println(this.library.get(i));
+        for (Books books : this.library) {
+            System.out.println(books);
             System.out.println("\n");
         }
     }

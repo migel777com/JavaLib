@@ -27,16 +27,16 @@ public class DB {
         return connection;
     }
 
-    public ArrayList<Book> read(Connection connection)
+    public ArrayList<Books> readBooks(Connection connection)
     {
-        ArrayList<Book> bookList = new ArrayList();
+        ArrayList<Books> bookList = new ArrayList<>();
         try
         {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM books");
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
-            Book book;
+            Books book;
             while (resultSet.next())
             {
                 String[] bookFields = new String[numberOfColumns];
@@ -44,7 +44,70 @@ public class DB {
                 {
                     bookFields[a-1] = resultSet.getObject(a).toString();
                 }
-                book = new Book(bookFields);
+                book = new Books(bookFields);
+                bookList.add(book);
+            }
+            resultSet.close();
+            connection.close();
+            statement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        return bookList;
+    }
+
+    public ArrayList<User> readStudents(Connection connection)
+    {
+        ArrayList<User> userList = new ArrayList<>();
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int numberOfColumns = metaData.getColumnCount();
+            User user;
+            while (resultSet.next())
+            {
+                String[] userFields = new String[numberOfColumns];
+                for(int a=1; a<=numberOfColumns; a++)
+                {
+                    userFields[a-1] = resultSet.getObject(a).toString();
+                }
+                user = new Student(userFields);
+                userList.add(user);
+            }
+            resultSet.close();
+            connection.close();
+            statement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        return userList;
+    }
+
+    public ArrayList<Books> readBorrowedBooks(Connection connection, Student student)
+    {
+        ArrayList<Books> bookList = new ArrayList<>();
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT b.book_id, b.name, b.author, b.quantity " +
+                    "FROM borrowed bor JOIN users u ON bor.user_id = u.user_id JOIN books b ON bor.book_id = b.book_id");
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int numberOfColumns = metaData.getColumnCount();
+            Books book;
+            while (resultSet.next())
+            {
+                String[] bookFields = new String[numberOfColumns];
+                for(int a=1; a<=numberOfColumns; a++)
+                {
+                    bookFields[a-1] = resultSet.getObject(a).toString();
+                }
+                book = new Books(bookFields);
                 bookList.add(book);
             }
             resultSet.close();
@@ -103,8 +166,31 @@ public class DB {
         return added;
     }
 
+    protected int addBorrowedBook(String bookName, String studentName)
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int added = 0;
+        try
+        {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement("INSERT INTO borrowed VALUES (SELECT user_id FROM users " +
+                    "WHERE username = ?, SELECT book_id FROM books WHERE name = ?)");
+            preparedStatement.setString(1, studentName);
+            preparedStatement.setString(2, bookName);
+            added = preparedStatement.executeUpdate();
+            connection.close();
+            preparedStatement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        return added;
+    }
 
-    protected int delete(String id)
+
+    protected int deleteStudent(String name)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -112,8 +198,29 @@ public class DB {
         try
         {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement("delete from books where books.book_id = ?");
-            preparedStatement.setString(1, id);
+            preparedStatement = connection.prepareStatement("delete from users where username = ?");
+            preparedStatement.setString(1, name);
+            deleted = preparedStatement.executeUpdate();
+            connection.close();
+            preparedStatement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        return deleted;
+    }
+
+    protected int deleteBook(String name)
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int deleted = 0;
+        try
+        {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement("delete from books where name = ?");
+            preparedStatement.setString(1, name);
             deleted = preparedStatement.executeUpdate();
             connection.close();
             preparedStatement.close();
