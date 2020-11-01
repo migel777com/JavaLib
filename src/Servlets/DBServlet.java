@@ -46,6 +46,7 @@ public class DBServlet extends HttpServlet
 
                 int added = db.addBorrowedBook(bookName, studentName);
                 request.setAttribute("crud", "c"+added);
+                doGet(request, response, studentName);
                 break;
             }
             case "deleteBook":
@@ -108,6 +109,37 @@ public class DBServlet extends HttpServlet
                 ArrayList<User> userList = db.readStudents(connection);
                 connection = db.getConnection();
                 ArrayList<Books> borList = db.readBorrowedBooks(connection, "admin");
+                connection.close();
+                //db.addBook("Story of the Great Alibek", "Baltabekov Galymzhan", 3);
+                //db.addStudent("migel", "123456789");
+                //db.addBorrowedBook("Story of the Great Alibek", "admin");
+                //db.deleteStudent("enemy");
+                //db.deleteBook("Bad Stories Collection");
+                //db.deleteBorrowedBook("migel" , "Story of the Great Alibek");
+                //db.updateBook("Story of the Great Alibek", "Baltabekov Galymzhan", 5);
+                //db.updateStudent("migel", "123456789");
+                request.setAttribute("bookList", bookList);
+                request.setAttribute("userList" , userList);
+                request.setAttribute("borList", borList);
+            }
+        }
+        catch (SQLException exception)
+        {
+            exception.printStackTrace();
+        }
+        request.getRequestDispatcher("main.jsp").forward(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, String name) throws ServletException, IOException {
+        try
+        {
+            Connection connection = db.getConnection();
+            if(connection != null) {
+                ArrayList<Books> bookList = db.readBooks(connection);
+                connection = db.getConnection();
+                ArrayList<User> userList = db.readStudents(connection);
+                connection = db.getConnection();
+                ArrayList<Books> borList = db.readBorrowedBooks(connection, name);
                 connection.close();
                 //db.addBook("Story of the Great Alibek", "Baltabekov Galymzhan", 3);
                 //db.addStudent("migel", "123456789");
