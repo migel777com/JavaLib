@@ -1,9 +1,13 @@
 package JavaClasses;
 
+import java.util.Date;
+
 public class Books {
     private String name;
     private String author;
     private int quantity;
+    private String borrowedTime;
+    private String returnTime;
 
     public Books(String name, String author, int quantity) {
         this.name = name;
@@ -19,6 +23,19 @@ public class Books {
             this.name = bookFields[1];
             this.author = bookFields[2];
             this.quantity = Integer.parseInt(bookFields[3]);
+        }
+    }
+
+    public Books(String[] bookFields, String withdate)
+    {
+        if(bookFields.length == 6)
+        {
+            //this.id = Integer.parseInt(bookFields[0]);
+            this.name = bookFields[1];
+            this.author = bookFields[2];
+            //this.quantity = Integer.parseInt(bookFields[3]);
+            this.borrowedTime = bookFields[4];
+            this.returnTime = bookFields[5];
         }
     }
 
@@ -40,6 +57,14 @@ public class Books {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public String getBorrowedTime() {
+        return borrowedTime;
+    }
+
+    public String getReturnTime() {
+        return returnTime;
     }
 
     public void setQuantity(int quantity) {

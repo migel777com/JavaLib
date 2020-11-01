@@ -1,7 +1,11 @@
 package JavaClasses;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class main {
-   public static void main(String[] args){
+   public static void main(String[] args) throws SQLException {
        /*Admin admin = new Admin();
        admin.newBook("Harry Potter and volandemort's dick", "Joan Rouling", 3);
        admin.library.printLib();

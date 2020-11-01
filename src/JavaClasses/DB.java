@@ -89,14 +89,15 @@ public class DB {
         return userList;
     }
 
-    public ArrayList<Books> readBorrowedBooks(Connection connection, Student student)
+    public ArrayList<Books> readBorrowedBooks(Connection connection, String name)
     {
         ArrayList<Books> bookList = new ArrayList<>();
         try
         {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT b.book_id, b.name, b.author, b.quantity " +
-                    "FROM borrowed bor JOIN users u ON bor.user_id = u.user_id JOIN books b ON bor.book_id = b.book_id");
+            ResultSet resultSet = statement.executeQuery("SELECT b.book_id, b.name, b.author, b.quantity, borrowed_time, return_time " +
+                    "FROM borrowed bor JOIN users u ON bor.user_id = u.user_id JOIN books b ON bor.book_id = b.book_id " +
+                    "WHERE u.username = '" + name + "'");
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             Books book;
@@ -107,7 +108,7 @@ public class DB {
                 {
                     bookFields[a-1] = resultSet.getObject(a).toString();
                 }
-                book = new Books(bookFields);
+                book = new Books(bookFields, "withDate");
                 bookList.add(book);
             }
             resultSet.close();
@@ -121,7 +122,7 @@ public class DB {
         return bookList;
     }
 
-    protected int addBook(String name, String author, int quant)
+    public int addBook(String name, String author, int quant)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -132,7 +133,7 @@ public class DB {
             preparedStatement = connection.prepareStatement("insert into books (name, author, quantity) values (?, ?, ?)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, author);
-            preparedStatement.setString(3, Integer.toString(quant));
+            preparedStatement.setInt(3, quant);
             added = preparedStatement.executeUpdate();
             connection.close();
             preparedStatement.close();
@@ -144,7 +145,7 @@ public class DB {
         return added;
     }
 
-    protected int addStudent(String name, String password)
+    public int addStudent(String name, String password)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -152,7 +153,7 @@ public class DB {
         try
         {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement("insert into students (name, password) values (?, ?)");
+            preparedStatement = connection.prepareStatement("insert into users (username, password, isAdmin) values (?, ?, false)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, password);
             added = preparedStatement.executeUpdate();
@@ -166,7 +167,7 @@ public class DB {
         return added;
     }
 
-    protected int addBorrowedBook(String bookName, String studentName)
+    public int addBorrowedBook(String bookName, String studentName)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -174,8 +175,10 @@ public class DB {
         try
         {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement("INSERT INTO borrowed VALUES (SELECT user_id FROM users " +
-                    "WHERE username = ?, SELECT book_id FROM books WHERE name = ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO borrowed \n" +
+                    "    SELECT u.user_id, b.book_id \n" +
+                    "    FROM users u CROSS JOIN books b\n" +
+                    "    WHERE u.username = ? and b.name = ?");
             preparedStatement.setString(1, studentName);
             preparedStatement.setString(2, bookName);
             added = preparedStatement.executeUpdate();
@@ -190,7 +193,7 @@ public class DB {
     }
 
 
-    protected int deleteStudent(String name)
+    public int deleteStudent(String name)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -211,7 +214,7 @@ public class DB {
         return deleted;
     }
 
-    protected int deleteBook(String name)
+    public int deleteBook(String name)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -232,7 +235,31 @@ public class DB {
         return deleted;
     }
 
-    protected int update(int id, String name, String author, String movieName, String bookURL, String movieURL, String imageURL)
+    public int deleteBorrowedBook(String username, String bookname)
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int deleted = 0;
+        try
+        {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement("delete from borrowed where " +
+                    "user_id IN (SELECT user_id FROM users WHERE username = ?) AND " +
+                    "book_id IN (SELECT book_id FROM books WHERE name = ?)");
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, bookname);
+            deleted = preparedStatement.executeUpdate();
+            connection.close();
+            preparedStatement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        return deleted;
+    }
+
+    public int updateBook(String name, String author, int quant)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -240,11 +267,34 @@ public class DB {
         try
         {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement("update books set book_name=?, book_author=?, book_poster=? where book_id=?");
+            preparedStatement = connection.prepareStatement("update books set name=?, author=?, quantity=? where name=?");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, author);
-            preparedStatement.setString(3, imageURL);
-            preparedStatement.setInt(4, id);
+            preparedStatement.setInt(3, quant);
+            preparedStatement.setString(4, name);
+            updated = preparedStatement.executeUpdate();
+            connection.close();
+            preparedStatement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        return updated;
+    }
+
+    public int updateStudent(String name, String password)
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int updated = 0;
+        try
+        {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement("update users set username=?, password=? where username=?");
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, name);
             updated = preparedStatement.executeUpdate();
             connection.close();
             preparedStatement.close();

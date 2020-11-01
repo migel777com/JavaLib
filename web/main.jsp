@@ -13,9 +13,20 @@
 </head>
 <body>
 <c:forEach var="book" items="${bookList}">
-    <c:out value="${book.id}"/>
     <c:out value="${book.name}"/>
     <c:out value="${book.author}"/>
+</c:forEach>
+
+<c:forEach var="user" items="${userList}">
+    <c:out value="${user.name}"/>
+    <c:out value="${user.password}"/>
+</c:forEach>
+
+<c:forEach var="book" items="${borList}">
+    <c:out value="${book.name}"/>
+    <c:out value="${book.author}"/>
+    <c:out value="${book.borrowedTime}"/>
+    <c:out value="${book.returnTime}"/>
 </c:forEach>
 </body>
 </html>

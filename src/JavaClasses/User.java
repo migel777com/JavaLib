@@ -1,7 +1,7 @@
 package JavaClasses;
 
 abstract public class User {
-    private int id;
+    //private int id;
     private String name;
     private String password;
 
@@ -15,9 +15,10 @@ abstract public class User {
     }
 
 
-    public int getId() {
+
+    /*public int getId() {
         return id;
-    }
+    }*/
 
     public String getName() {
         return name;

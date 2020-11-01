@@ -12,15 +12,16 @@ public class Student extends User implements studentInterface{
         //this.library = library;
     }
 
-    public Student(String[] bookFields)
+    public Student(String[] userFields)
     {
         super();
-        if(bookFields.length == 3)
+        if(userFields.length == 4)
         {
             //this.id = Integer.parseInt(bookFields[0]);
-            this.setName(bookFields[1]);
-            this.setPassword(bookFields[2]);
+            this.setName(userFields[1]);
+            this.setPassword(userFields[2]);
         }
+        library = null;
     }
 
     @Override
