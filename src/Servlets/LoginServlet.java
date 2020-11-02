@@ -49,9 +49,8 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(loggedin);
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(60);
-            response.sendRedirect("main.jsp");
+            response.sendRedirect("Redirect.jsp");
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

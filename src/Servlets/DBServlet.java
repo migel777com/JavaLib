@@ -1,8 +1,6 @@
 package Servlets;
 
-import JavaClasses.Books;
-import JavaClasses.DB;
-import JavaClasses.User;
+import JavaClasses.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,12 +10,23 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class DBServlet extends HttpServlet
 {
     DB db = new DB();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String submit = request.getParameter("submit");
+
+        Connection connection = db.getConnection();
+        ArrayList<Books> books = db.readBooks(connection);
+        connection = db.getConnection();
+        ArrayList<User> users = db.readStudents(connection);
+        connection = db.getConnection();
+        ArrayList<Books> borrowed = db.readBorrowedBooks(connection);
+        int error_code=0;
+
+
         switch (submit)
         {
             case "addBook":
@@ -25,8 +34,9 @@ public class DBServlet extends HttpServlet
                 String bookName = request.getParameter("bookName");
                 String bookAuthor = request.getParameter("bookAuthor");
                 int quant = Integer.parseInt(request.getParameter("quant"));
+                String image = request.getParameter("bookImage");
 
-                int added = db.addBook(bookName, bookAuthor, quant);
+                int added = db.addBook(bookName, bookAuthor, quant, image);
                 request.setAttribute("crud", "c"+added);
                 break;
             }
@@ -44,6 +54,7 @@ public class DBServlet extends HttpServlet
                 String bookName = request.getParameter("bookName");
                 String studentName = request.getParameter("studentName");
 
+
                 int added = db.addBorrowedBook(bookName, studentName);
                 request.setAttribute("crud", "c"+added);
                 doGet(request, response, studentName);
@@ -52,6 +63,13 @@ public class DBServlet extends HttpServlet
             case "deleteBook":
             {
                 String bookName = request.getParameter("bookName");
+
+                for (Books book: borrowed) {
+                    if (book.getName().equals(bookName)) {
+                        error_code = 1;
+                        doGet(request, response, error_code);
+                    }
+                }
                 int deleted = db.deleteBook(bookName);
                 request.setAttribute("crud", "d"+deleted);
                 break;
@@ -59,6 +77,14 @@ public class DBServlet extends HttpServlet
             case "deleteStudent":
             {
                 String studentName = request.getParameter("studentName");
+
+                for (Books book: borrowed) {
+                    if (book.getUsername().equals(studentName)) {
+                        error_code = 1;
+                        doGet(request, response, error_code);
+                    }
+                }
+
                 int deleted = db.deleteStudent(studentName);
                 request.setAttribute("crud", "d"+deleted);
                 break;
@@ -76,8 +102,9 @@ public class DBServlet extends HttpServlet
                 String bookName = request.getParameter("bookName");
                 String bookAuthor = request.getParameter("bookAuthor");
                 int quant = Integer.parseInt(request.getParameter("quant"));
+                String img = request.getParameter("image");
 
-                int updated = db.updateBook(bookName, bookAuthor, quant);
+                int updated = db.updateBook(bookName, bookAuthor, quant, img);
                 request.setAttribute("crud", "u"+updated);
                 break;
             }
@@ -112,7 +139,7 @@ public class DBServlet extends HttpServlet
                 connection.close();
                 //db.addBook("Story of the Great Alibek", "Baltabekov Galymzhan", 3);
                 //db.addStudent("migel", "123456789");
-                //db.addBorrowedBook("Story of the Great Alibek", "admin");
+                db.addBorrowedBook("Story of the Great Alibek", "admin");
                 //db.deleteStudent("enemy");
                 //db.deleteBook("Bad Stories Collection");
                 //db.deleteBorrowedBook("migel" , "Story of the Great Alibek");
@@ -127,7 +154,7 @@ public class DBServlet extends HttpServlet
         {
             exception.printStackTrace();
         }
-        request.getRequestDispatcher("main.jsp").forward(request, response);
+        request.getRequestDispatcher("Library.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response, String name) throws ServletException, IOException {
@@ -158,7 +185,30 @@ public class DBServlet extends HttpServlet
         {
             exception.printStackTrace();
         }
-        request.getRequestDispatcher("main.jsp").forward(request, response);
+        request.getRequestDispatcher("Library.jsp").forward(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, int error_code) throws ServletException, IOException {
+        try
+        {
+            Connection connection = db.getConnection();
+            if(connection != null) {
+                ArrayList<Books> bookList = db.readBooks(connection);
+                connection = db.getConnection();
+                ArrayList<User> userList = db.readStudents(connection);
+                connection = db.getConnection();
+                ArrayList<Books> borList = db.readBorrowedBooks(connection);
+                connection.close();
+                request.setAttribute("bookList", bookList);
+                request.setAttribute("userList" , userList);
+                request.setAttribute("borList", borList);
+            }
+        }
+        catch (SQLException exception)
+        {
+            exception.printStackTrace();
+        }
+
+        request.getRequestDispatcher("error.jsp").forward(request, response);
     }
 }
-

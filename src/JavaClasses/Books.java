@@ -5,8 +5,10 @@ public class Books {
     private String name;
     private String author;
     private int quantity;
+    private String image;
     private String borrowedTime;
     private String returnTime;
+    private String username;
 
     public Books(String name, String author, int quantity) {
         this.name = name;
@@ -16,18 +18,19 @@ public class Books {
 
     public Books(String[] bookFields)
     {
-        if(bookFields.length == 4)
+        if(bookFields.length == 5)
         {
             //this.id = Integer.parseInt(bookFields[0]);
             this.name = bookFields[1];
             this.author = bookFields[2];
             this.quantity = Integer.parseInt(bookFields[3]);
+            this.image = bookFields[4];
         }
     }
 
     public Books(String[] bookFields, String withdate)
     {
-        if(bookFields.length == 6)
+        if(bookFields.length == 8)
         {
             //this.id = Integer.parseInt(bookFields[0]);
             this.name = bookFields[1];
@@ -35,6 +38,8 @@ public class Books {
             //this.quantity = Integer.parseInt(bookFields[3]);
             this.borrowedTime = bookFields[4];
             this.returnTime = bookFields[5];
+            this.image = bookFields[6];
+            this.username = bookFields[7];
         }
     }
 
@@ -64,6 +69,14 @@ public class Books {
 
     public String getReturnTime() {
         return returnTime;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setQuantity(int quantity) {

@@ -17,8 +17,6 @@ public class TheGreatLib{
 
     public void giveBook(Books book){
         Books order = new Books(book.getName(), book.getAuthor(), 1);
-
-
         if(library.contains(book)){
             int tempindex = library.indexOf(book);
             int quan = library.get(tempindex).getQuantity();
@@ -31,10 +29,10 @@ public class TheGreatLib{
         }
     }
 
-    public void newBook(String name, String author, int quantity){
+    public void newBook(String name, String author, int quantity, String image){
         Books newBook = new Books(name, author, quantity);
         library.add(newBook);
-        db.addBook(name, author, quantity);
+        db.addBook(name, author, quantity,image);
     }
 
     public void printLib(){

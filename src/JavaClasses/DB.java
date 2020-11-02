@@ -33,7 +33,7 @@ public class DB {
         try
         {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM books");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM books WHERE quantity > 0");
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             Books book;
@@ -89,13 +89,14 @@ public class DB {
         return userList;
     }
 
+
     public ArrayList<Books> readBorrowedBooks(Connection connection, String name)
     {
         ArrayList<Books> bookList = new ArrayList<>();
         try
         {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT b.book_id, b.name, b.author, b.quantity, borrowed_time, return_time " +
+            ResultSet resultSet = statement.executeQuery("SELECT b.book_id, b.name, b.author, b.quantity, borrowed_time, return_time, b.image, u.username " +
                     "FROM borrowed bor JOIN users u ON bor.user_id = u.user_id JOIN books b ON bor.book_id = b.book_id " +
                     "WHERE u.username = '" + name + "'");
             ResultSetMetaData metaData = resultSet.getMetaData();
@@ -122,7 +123,39 @@ public class DB {
         return bookList;
     }
 
-    public int addBook(String name, String author, int quant)
+    public ArrayList<Books> readBorrowedBooks(Connection connection)
+    {
+        ArrayList<Books> bookList = new ArrayList<>();
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT b.book_id, b.name, b.author, b.quantity, borrowed_time, return_time, b.image, u.username " +
+                    "FROM borrowed bor JOIN users u ON bor.user_id = u.user_id JOIN books b ON bor.book_id = b.book_id ");
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int numberOfColumns = metaData.getColumnCount();
+            Books book;
+            while (resultSet.next())
+            {
+                String[] bookFields = new String[numberOfColumns];
+                for(int a=1; a<=numberOfColumns; a++)
+                {
+                    bookFields[a-1] = resultSet.getObject(a).toString();
+                }
+                book = new Books(bookFields, "withDate");
+                bookList.add(book);
+            }
+            resultSet.close();
+            connection.close();
+            statement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        return bookList;
+    }
+
+    public int addBook(String name, String author, int quant, String image)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -130,10 +163,11 @@ public class DB {
         try
         {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement("insert into books (name, author, quantity) values (?, ?, ?)");
+            preparedStatement = connection.prepareStatement("insert into books (name, author, quantity, image) values (?, ?, ?, ?)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, author);
             preparedStatement.setInt(3, quant);
+            preparedStatement.setString(4, image);
             added = preparedStatement.executeUpdate();
             connection.close();
             preparedStatement.close();
@@ -167,6 +201,27 @@ public class DB {
         return added;
     }
 
+    public int decrementBook(String name)
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int updated = 0;
+        try
+        {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement("UPDATE books SET quantity = quantity - 1 WHERE name = ?");
+            preparedStatement.setString(1, name);
+            updated = preparedStatement.executeUpdate();
+            connection.close();
+            preparedStatement.close();
+        }
+        catch (SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        return updated;
+    }
+
     public int addBorrowedBook(String bookName, String studentName)
     {
         Connection connection = null;
@@ -189,6 +244,7 @@ public class DB {
         {
             sqlException.printStackTrace();
         }
+        if (added>0) decrementBook(bookName);
         return added;
     }
 
@@ -259,7 +315,7 @@ public class DB {
         return deleted;
     }
 
-    public int updateBook(String name, String author, int quant)
+    public int updateBook(String name, String author, int quant, String image)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -267,11 +323,12 @@ public class DB {
         try
         {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement("update books set name=?, author=?, quantity=? where name=?");
+            preparedStatement = connection.prepareStatement("update books set name=?, author=?, quantity=?, image=? where name=?");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, author);
             preparedStatement.setInt(3, quant);
-            preparedStatement.setString(4, name);
+            preparedStatement.setString(4, image);
+            preparedStatement.setString(5, name);
             updated = preparedStatement.executeUpdate();
             connection.close();
             preparedStatement.close();
