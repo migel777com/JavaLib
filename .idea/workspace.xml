@@ -6,7 +6,68 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b543fc99-7c21-4a76-a001-271a5c257e16" name="Default Changelist" comment="" />
+    <list default="true" id="b543fc99-7c21-4a76-a001-271a5c257e16" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Servlets/AdminBorrowedServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Servlets/BorrowedServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Servlets/StudentsServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/AllBorrowed.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/BorrowedBooks.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/ForLibrarian.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/Library.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/Students.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/error.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/footer.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/header.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/books-stack-of-three.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/books.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/index.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/leather.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/wood.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/login-register.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/redirect.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/registration.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaLib_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaLib_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_servlet_jstl_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javax_servlet_jstl_1_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaLib.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaLib.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/JavaClasses/Books.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/JavaClasses/Books.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/JavaClasses/DB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/JavaClasses/DB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/JavaClasses/TheGreatLib.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/JavaClasses/TheGreatLib.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/Servlets/DBServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/Servlets/DBServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/Servlets/LoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/WEB-INF/classes/Servlets/LoginServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/main.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/JavaLib_war_exploded/main.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JavaLib/JavaClasses/Books.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaLib/JavaClasses/Books.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JavaLib/JavaClasses/DB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaLib/JavaClasses/DB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JavaLib/JavaClasses/TheGreatLib.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaLib/JavaClasses/TheGreatLib.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JavaLib/META-INF/JavaLib.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JavaLib/Servlets/DBServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaLib/Servlets/DBServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JavaLib/Servlets/LoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaLib/Servlets/LoginServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/Books.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/Books.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/DB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/DB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/TheGreatLib.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/TheGreatLib.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/TheStudentsList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/TheStudentsList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/adminInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/adminInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaClasses/studentInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JavaClasses/studentInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servlets/DBServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servlets/DBServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servlets/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servlets/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servlets/LogoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servlets/LogoutServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/main.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/main.jsp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -197,7 +258,17 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -221,6 +292,7 @@
       <workItem from="1604211526554" duration="19288000" />
       <workItem from="1604246068348" duration="27773000" />
       <workItem from="1604279570926" duration="21000" />
+      <workItem from="1604279739572" duration="232000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1604071020776</created>
@@ -257,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604243602050</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Final Commit">
+      <created>1604279978674</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1604279978674</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +348,8 @@
     <MESSAGE value="Great commit" />
     <MESSAGE value="SQl commit" />
     <MESSAGE value="Server Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Server Commit" />
+    <MESSAGE value="Final Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final Commit" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Project_Structure" timestamp="1604081753357">
@@ -300,10 +380,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1536.824@0.0.1536.824" timestamp="1604081689523" />
-    <state x="393" y="9" key="CommitChangelistDialog2" timestamp="1604243600947">
+    <state x="393" y="9" key="CommitChangelistDialog2" timestamp="1604279974272">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1604243600947" />
+    <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1604279974272" />
     <state x="686" y="212" key="FileChooserDialogImpl" timestamp="1604247822605">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

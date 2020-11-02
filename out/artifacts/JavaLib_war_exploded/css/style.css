@@ -1,0 +1,157 @@
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'Bookman, URW Bookman L, serif';
+}
+
+html { height: 100%; }
+
+body{
+	display: flex;
+	flex-direction: column;
+	background-color: antiquewhite;
+}
+
+h2 {
+	padding: 0 5px 0 5px;
+	display: inline-block;
+	color: black;
+}
+
+a{
+	text-decoration: none;
+}
+
+p { font-size: 20px; }
+
+#handbook{
+	background-color: aquamarine;
+	padding: 2%;
+}
+
+.page{
+	margin-left: auto;
+	margin-right: auto;
+	background-color: rgba(250, 235, 215,0.7);
+	height: 100%;
+	width: 60%;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+#menu{
+	width: 100%;
+	height: auto;
+	background-image: url('../img/leather.png');
+	background-repeat: repeat-x;
+	background-size: contain;
+	display: flex;
+	justify-content: space-around;
+}
+
+.items{
+	height: 33%;
+	width: 33%;
+}
+
+header {
+	display: flex;
+	justify-content: space-around;
+	background: black;
+	width: 100%;
+	height: 50px;
+}
+
+footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 50px;
+	background-image: url('../img/wood.jpg');background-repeat: repeat-x;
+}
+
+.controlPanel {
+	width: 100%;
+	height: auto;
+}
+
+.controlPanelBlock {
+	height: 100%;
+	width: 100%;
+	vertical-align: middle;
+	background-color: rgba(0,0,0,0.3);
+	border-radius: 5px;
+}
+
+.container{
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 5%;
+	column-gap: 10%;
+}
+
+.inp{
+	text-align:center;
+}
+.backMainPage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	background-image: url('../img/wood.jpg');background-repeat: repeat-x;
+	color: black;
+	width: 100%;
+	height: auto;
+	border: none;
+	padding: 1px 0 1px 0;
+}
+
+.backMainPage span{
+	border-radius: 25px;
+	background-color: RGB(10,106,12);
+	border: 4px solid RGB(150,12,39);
+	padding: 0.5%;
+	font-size: 35pt;
+}
+
+#log-block div{
+	padding-bottom: 10px;
+}
+
+#log-block{
+	display: grid;
+	font-size: 20pt;
+	grid-template-columns: repeat(2, 1fr);
+	text-align: left;
+}
+
+#log-block-button{
+	display: grid;
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+
+#log-block input{
+	font-size: 20pt;
+}
+
+.entity{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.borrow-button-block input{
+	border-radius: 5px;
+}
+
+.cover {
+	width: 120px;
+	height: 180px;
+}
+
+
